@@ -41,10 +41,8 @@ def sms():
 #how calls ar ehandled
 @app.route("/call", methods=['GET', 'POST'])
 def call():
-	print "Incoming Call"
 	from_number = request.form['From']
 	if from_number != PRIVATE_NUMBER:
-		print "from outside"
 		return perform_call(PRIVATE_NUMBER)
 	else:
 		response = VoiceResponse()
@@ -70,7 +68,6 @@ def callscreen():
 def send_message(msg, number):
 	response = MessagingResponse()
 	response.message(msg, to=number, from_=TWILIO_NUMBER)
-	print str(response)
 	return str(response)
 
 def perform_call(number, caller_id=None):
@@ -83,7 +80,6 @@ def perform_call(number, caller_id=None):
 	else:
 		d.number(number)
 	response.append(d)
-	print str(response)
 	return str(response)
 
 if __name__ == '__main__':
